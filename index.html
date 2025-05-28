@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🧬 Portal Pembayaran Futuristik</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      background: radial-gradient(circle at top, #0f0f1a, #050511);
+      color: #00ffee;
+      overflow-x: hidden;
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 40px #00ffe1, 0 0 20px #0085ff inset;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #00ffe1;
+      text-shadow: 0 0 5px #00ffe1, 0 0 10px #00d8ff;
+      margin-bottom: 1.2rem;
+      animation: glowPulse 2s infinite;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { text-shadow: 0 0 5px #00ffe1, 0 0 10px #00d8ff; }
+      50% { text-shadow: 0 0 15px #00ffe1, 0 0 30px #00d8ff; }
+    }
+
+    .payment-method {
+      margin: 2rem 0;
+    }
+
+    .payment-method h2 {
+      color: #00e1ff;
+      text-shadow: 0 0 4px #00ffe1;
+      margin-bottom: 10px;
+    }
+
+    .image-wrapper {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00ffff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .image-wrapper img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #00ffff, 0 0 50px #0080ff;
+    }
+
+    .image-wrapper a::after {
+      content: 'Klik untuk simpan';
+      position: absolute;
+      bottom: -24px;
+      font-size: 0.85em;
+      color: #aaffff;
+      animation: glowPulse 2s infinite;
+    }
+
+    button {
+      margin-top: 10px;
+      background: linear-gradient(90deg, #00ffe1, #00aaff);
+      color: #000;
+      font-weight: bold;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffe1;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #00aaff, #00ffe1);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00ffe1, 0 0 40px #0088ff;
+    }
+
+    .toast {
+      margin-top: 20px;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+      font-weight: bold;
+      font-size: 1em;
+      color: #0f0;
+      text-shadow: 0 0 5px #00ff00;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    .info p {
+      margin: 6px 0;
+      font-size: 1.1em;
+      color: #aaffff;
+    }
+
+    .footer {
+      margin-top: 3em;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    /* RESPONSIVE */
+    @media screen and (max-width: 768px) {
+      h1 {
+        font-size: 1.5em;
+      }
+
+      button {
+        width: 100%;
+        padding: 14px;
+      }
+
+      .info p {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>⚡ HALAMAN PEMBAYARAN TEKNOLOGI TINGGI ⚡</h1>
+    <p>Pilih metode pembayaran & salin nomor untuk melanjutkan transaksi.</p>
+
+    <div class="payment-method">
+      <h2>QRIS UNIVERSAL</h2>
+      <div class="image-wrapper">
+        <a href="https://files.catbox.moe/bkbs0x.jpg" download target="_blank">
+          <img src="https://files.catbox.moe/bkbs0x.jpg" alt="QRIS Universal" />
+        </a>
+      </div>
+    </div>
+
+    <div class="payment-method">
+      <h2>DANA</h2>
+      <div class="image-wrapper">
+        <img src="https://files.catbox.moe/6jtvll.png" alt="Dana Payment" />
+      </div>
+      <div class="info">
+        <p>No Dana: <span id="dana">081234567890</span></p>
+        <button onclick="copyText('dana')">Salin Nomor Dana</button>
+      </div>
+    </div>
+
+    <div class="payment-method">
+      <h2>GOPAY</h2>
+      <div class="image-wrapper">
+        <img src="https://files.catbox.moe/7nz86g.jpg" alt="Gopay Payment" />
+      </div>
+      <div class="info">
+        <p>No Gopay: <span id="gopay">085612345678</span></p>
+        <button onclick="copyText('gopay')">Salin Nomor Gopay</button>
+      </div>
+    </div>
+
+    <div id="notifikasi" class="toast">✅ Nomor berhasil disalin!</div>
+
+    <div class="footer">
+      Dibangun dengan ♥ Teknologi Futuristik | Support Mobile & Desktop
+    </div>
+  </div>
+
+  <script>
+    function copyText(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const notif = document.getElementById("notifikasi");
+        notif.classList.add("show");
+        setTimeout(() => notif.classList.remove("show"), 2000);
+      });
+    }
+  </script>
+</body>
+</html>
